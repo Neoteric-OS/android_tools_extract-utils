@@ -644,6 +644,13 @@ function write_blueprint_packages() {
             printf '\tname: "%s",\n' "$PKGNAME"
             printf '\towner: "%s",\n' "${VENDOR%\/*}"
             printf '\tsrc: "%s/%s",\n' "$SRC" "$FILE"
+            if [ "$EXTRA" = "overlay" ]; then
+                SRC="$SRC/overlay"
+            elif [ "$EXTRA" = "priv-app" ]; then
+                SRC="$SRC/priv-app"
+            else
+                SRC="$SRC/app"
+            fi
             printf '\tfilename: "%s",\n' "$FILE"
         elif [ "$CLASS" = "APPS" ]; then
             printf 'android_app_import {\n'
@@ -904,6 +911,7 @@ function write_product_packages() {
         write_blueprint_packages "APPS" "vendor" ""
         write_blueprint_packages "APPS" "vendor" "priv-app"
         write_blueprint_packages "APPS" "product" ""
+        write_blueprint_packages "APPS" "product" "overlay"
         write_blueprint_packages "APPS" "product" "priv-app"
         write_blueprint_packages "APPS" "system_ext" ""
         write_blueprint_packages "APPS" "system_ext" "priv-app"
