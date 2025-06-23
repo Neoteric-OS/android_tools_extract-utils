@@ -80,7 +80,7 @@ function setup_vendor_deps() {
     done
 
     if [ -z "$PATCHELF_VERSION" ]; then
-        export PATCHELF_VERSION=0_9
+        export PATCHELF_VERSION=0_17_2
     fi
 
     if [ -z "$PATCHELF" ]; then
